@@ -7,7 +7,7 @@ npm i redis2ws
 服务端通过一个端口参数即可绑定该端口的ws服务，以及本机的6379的redis服务
 ```js
 var app = require('redis2ws')
-app.start(1998)
+app.start(1998,{host:'redis',port:6379})
 ```
 网页端需要引入socket.io的js库，并进行订阅发布等操作即可
 ```html

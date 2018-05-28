@@ -2,11 +2,14 @@ var app = require('express')()
 var server=require('http').createServer(app);
 var io = require('socket.io').listen(server)
 var redis = require("redis")
-var redisClient = redis.createClient()
-var redisClient2 = redis.createClient()
 
 var app = {
-    start: function(port){
+    start: function(port,redisOps){
+        redisOps = redisOps?redisOps:{};
+        var rport = redisOps.port || 6379;
+        var rhost = redisOps.host || '127.0.0.1';
+        var redisClient = redis.createClient(rport,rhost)
+        var redisClient2 = redis.createClient(rport,rhost)
         //捕捉异常
         io.on("error", function (err) {
             console.log("Error " + err);
